@@ -12,13 +12,23 @@
       <button class="text-button" type="button" (click)="toggleRules()">
         {{ rulesOpen() ? 'Close rules' : 'How to play' }}
       </button>
+      <button
+        class="help-button"
+        type="button"
+        (click)="toggleRules()"
+        [attr.aria-expanded]="rulesOpen()"
+        aria-controls="rules-panel"
+      >
+        <span aria-hidden="true">?</span>
+        <span class="sr-only">{{ rulesOpen() ? 'Close rules' : 'How to play' }}</span>
+      </button>
       <button class="primary-button compact" type="button" (click)="newGame()">New game</button>
     </nav>
   </header>
 
   <main>
     @if (rulesOpen()) {
-      <section class="rules-panel" aria-labelledby="rules-title">
+      <section id="rules-panel" class="rules-panel" aria-labelledby="rules-title">
         <div>
           <p class="eyebrow">Rules</p>
           <h2 id="rules-title">Survive all 44 cards</h2>

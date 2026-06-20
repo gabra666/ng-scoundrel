@@ -33,6 +33,8 @@ yarn-error.log
 /.angular/cache
 /.serve.stderr.log
 /.serve.stdout.log
+/.pwa-serve*.log
+/.static-pwa*.log
 .sass-cache/
 /connect.lock
 /coverage

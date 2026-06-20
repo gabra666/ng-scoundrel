@@ -74,6 +74,31 @@ button {
   cursor: pointer;
 }
 
+.help-button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  display: none;
+  font-size: 14px;
+  font-weight: 700;
+  height: 34px;
+  justify-content: center;
+  width: 34px;
+}
+
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .text-button:hover,
 .avoid-button:not(:disabled):hover {
   color: var(--wine);
@@ -641,6 +666,10 @@ a:focus-visible {
     display: none;
   }
 
+  .help-button {
+    display: inline-flex;
+  }
+
   .rules-panel,
   .hero,
   .chronicle {
@@ -838,9 +867,9 @@ a:focus-visible {
   }
 
   .table-panel {
-    --board-stage-height: 460px;
+    --board-stage-height: 438px;
     min-height: 0;
-    padding: 14px 14px 12px;
+    padding: 4px 14px 12px;
   }
 
   .card-grid {
@@ -849,7 +878,7 @@ a:focus-visible {
     grid-auto-rows: 210px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(2, 210px);
-    padding: 18px 0 14px;
+    padding: 6px 0 4px;
   }
 
   .hero h1 {
@@ -913,7 +942,7 @@ a:focus-visible {
   .board-actions {
     flex-basis: 55px;
     height: 55px;
-    padding: 6px 0;
+    padding: 2px 0 6px;
   }
 
   .board-actions .avoid-button {

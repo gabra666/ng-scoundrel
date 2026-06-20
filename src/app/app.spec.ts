@@ -1,6 +1,8 @@
 import { WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { resolveCard, seededRandom, startGame } from './game/game.engine';
+import { GameSaveService } from './game/game-save.service';
 import { GameState, GameStatus } from './game/game.models';
 
 describe('App', () => {
@@ -18,6 +20,55 @@ describe('App', () => {
 
     expect(element.querySelector('h1')?.textContent).toContain('Choose carefully');
     expect(element.querySelectorAll('.playing-card')).toHaveLength(4);
+  });
+
+  it('restores an interrupted game with its empty card slot intact', () => {
+    const saveService = TestBed.inject(GameSaveService);
+    const initial = startGame(seededRandom(34));
+    const usedCard = initial.room.cards[1];
+    const restoredState = resolveCard(
+      initial,
+      usedCard.id,
+      usedCard.kind === 'monster' ? 'barehanded' : undefined,
+    );
+    const roomSlots = initial.room.cards.map((card) => (card.id === usedCard.id ? null : card.id));
+    saveService.save(restoredState, roomSlots);
+
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const component = fixture.componentInstance as unknown as {
+      state: WritableSignal<GameState>;
+      roomSlots: WritableSignal<(string | null)[]>;
+    };
+
+    expect(component.state()).toEqual(restoredState);
+    expect(component.roomSlots()).toEqual(roomSlots);
+    expect(element.querySelectorAll('.card-slot')).toHaveLength(4);
+    expect(element.querySelectorAll('.playing-card')).toHaveLength(3);
+  });
+
+  it('normalizes a used live slot before saving and resumes it as empty', () => {
+    const firstFixture = TestBed.createComponent(App);
+    const firstComponent = firstFixture.componentInstance as unknown as {
+      state: WritableSignal<GameState>;
+      resolve: (card: GameState['room']['cards'][number], mode?: 'barehanded') => void;
+    };
+    const usedCard = firstComponent.state().room.cards[1];
+
+    firstComponent.resolve(
+      usedCard,
+      usedCard.kind === 'monster' ? 'barehanded' : undefined,
+    );
+
+    expect(TestBed.inject(GameSaveService).load()?.roomSlots[1]).toBeNull();
+
+    const restoredFixture = TestBed.createComponent(App);
+    restoredFixture.detectChanges();
+    const restoredElement = restoredFixture.nativeElement as HTMLElement;
+
+    expect(restoredElement.querySelectorAll('.card-slot')).toHaveLength(4);
+    expect(restoredElement.querySelectorAll('.playing-card')).toHaveLength(3);
   });
 
   it.each([

@@ -1,7 +1,8 @@
 # ng-scoundrel
 
 A responsive, single-player implementation of Scoundrel built with Angular 21. The game
-uses a standard 44-card dungeon and stores only aggregate win/loss statistics in the browser.
+uses a standard 44-card dungeon, automatically restores interrupted runs, and works offline
+after the first successful load.
 
 ## Development
 
@@ -54,5 +55,16 @@ The expected URL is `https://<username>.github.io/ng-scoundrel/`.
 ## Architecture
 
 The rules engine under `src/app/game` is pure TypeScript and does not depend on Angular.
-Angular owns presentation, browser statistics, and user interaction. There is no backend,
-authentication, or active-game persistence.
+Angular owns presentation, browser persistence, offline caching, and user interaction. There is
+no backend or authentication. Active games and aggregate statistics are stored locally in the
+browser.
+
+## Offline use
+
+The production build includes an Angular service worker and installable web app manifest. Open
+the deployed app once while online so its application shell and local fonts can be cached. After
+that, it can be reopened and refreshed without a network connection.
+
+Active runs are saved after every action. If the browser or installed app is closed by the
+operating system, reopening Scoundrel resumes the exact room, card positions, health, weapon,
+and dungeon order. Victory and defeat clear the active save after recording statistics.
