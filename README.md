@@ -1,59 +1,58 @@
-# NgScoundrel
+# ng-scoundrel
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.15.
+A responsive, single-player implementation of Scoundrel built with Angular 21. The game
+uses a standard 44-card dungeon and stores only aggregate win/loss statistics in the browser.
 
-## Development server
+## Development
 
-To start a local development server, run:
+Requirements:
 
-```bash
-ng serve
-```
+- Node.js 22
+- npm 10
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Install dependencies and start the local server:
 
 ```bash
-ng generate component component-name
+npm install
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Open `http://localhost:4200`.
+
+Run the test suite and production build:
 
 ```bash
-ng generate --help
+npm run test:ci
+npm run build
 ```
 
-## Building
+## Rules
 
-To build the project run:
+- Remove the red aces and face cards from a standard deck, leaving 44 cards.
+- Black cards are monsters. Their rank is their damage; jacks through aces are worth 11–14.
+- Diamonds are weapons and hearts are healing potions, each worth their numbered rank.
+- Draw four cards, resolve three in any order, and carry the remaining card into the next room.
+- A weapon reduces monster damage by its value. After its first kill, it can only fight monsters
+  whose value is no greater than the previous monster defeated with that weapon.
+- Only the first potion used in each room restores health. Health cannot exceed 20.
+- A full room can be moved to the bottom of the dungeon, but two rooms cannot be avoided in a row.
+- Clear every card without reaching zero health to win.
 
-```bash
-ng build
-```
+## GitHub Pages
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The included workflow tests and builds the app for the `/ng-scoundrel/` base path, then deploys
+the browser bundle through GitHub Pages.
 
-## Running unit tests
+After creating and pushing a GitHub repository named `ng-scoundrel`:
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+1. Open **Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Push to the `main` branch or run the workflow manually.
 
-```bash
-ng test
-```
+The expected URL is `https://<username>.github.io/ng-scoundrel/`.
 
-## Running end-to-end tests
+## Architecture
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The rules engine under `src/app/game` is pure TypeScript and does not depend on Angular.
+Angular owns presentation, browser statistics, and user interaction. There is no backend,
+authentication, or active-game persistence.

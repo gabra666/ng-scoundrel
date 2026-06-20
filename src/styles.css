@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --cream: #f4f0e5;
+  --green: #19352c;
+  --ink: #20221c;
+  --line: #d9d2c3;
+  --muted: #77786f;
+  --sans: 'DM Sans', sans-serif;
+  --serif: 'Libre Baskerville', Georgia, serif;
+  --wine: #6b1d2c;
+  color-scheme: light;
+  font-family: var(--sans);
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--cream);
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 7%, rgba(107, 29, 44, 0.035), transparent 24%), var(--cream);
+  color: var(--ink);
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--wine);
+  color: white;
+}
