@@ -22,6 +22,14 @@ describe('App', () => {
     expect(element.querySelectorAll('.playing-card')).toHaveLength(4);
   });
 
+  it('credits the original game designers', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const credit = fixture.nativeElement.querySelector('.game-credit') as HTMLElement | null;
+
+    expect(credit?.textContent).toContain('Zach Gage and Kurt Bieg');
+  });
+
   it('restores an interrupted game with its empty card slot intact', () => {
     const saveService = TestBed.inject(GameSaveService);
     const initial = startGame(seededRandom(34));

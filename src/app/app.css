@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 1440px;
+  max-width: 1680px;
   padding: 24px 5vw;
 }
 
@@ -127,7 +127,7 @@ button {
 
 main {
   margin: 0 auto;
-  max-width: 1440px;
+  max-width: 1680px;
   padding: 0 5vw;
 }
 
@@ -357,11 +357,11 @@ main {
 }
 
 .table-panel {
-  --board-stage-height: 460px;
+  --board-stage-height: 500px;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 36px clamp(28px, 4vw, 62px) 28px;
+  padding: 36px clamp(28px, 3vw, 48px) 28px;
 }
 
 .avoid-button {
@@ -399,7 +399,7 @@ main {
   flex: 0 0 var(--board-stage-height);
   gap: clamp(12px, 2vw, 25px);
   grid-template-columns: repeat(4, minmax(130px, 1fr));
-  grid-template-rows: 350px;
+  grid-template-rows: 390px;
   height: var(--board-stage-height);
   min-height: var(--board-stage-height);
   padding: 40px 0 28px;
@@ -413,11 +413,11 @@ main {
   color: #171913;
   display: flex;
   flex-direction: column;
-  height: 350px;
-  max-width: 190px;
-  min-height: 350px;
+  height: 390px;
+  max-width: 220px;
+  min-height: 390px;
   overflow: hidden;
-  padding: 17px;
+  padding: 20px;
   position: relative;
   transition:
     transform 180ms ease,
@@ -429,7 +429,7 @@ main {
   align-items: flex-start;
   display: flex;
   justify-content: center;
-  min-height: 350px;
+  min-height: 390px;
   min-width: 0;
 }
 
@@ -446,12 +446,12 @@ main {
 .card-corner span {
   display: block;
   font-family: var(--serif);
-  font-size: 23px;
+  font-size: 27px;
   line-height: 0.9;
 }
 
 .card-corner span {
-  font-size: 18px;
+  font-size: 21px;
   margin-top: 5px;
 }
 
@@ -459,7 +459,7 @@ main {
   align-items: center;
   display: flex;
   flex: 1;
-  font-size: clamp(60px, 7vw, 105px);
+  font-size: clamp(72px, 6vw, 112px);
   justify-content: center;
   opacity: 0.92;
   text-shadow: 0 3px 0 rgba(255, 255, 255, 0.5);
@@ -474,12 +474,12 @@ main {
   color: #55584e;
   display: flex;
   justify-content: space-between;
-  padding: 11px 0;
+  padding: 13px 0;
 }
 
 .card-meta span,
 .card-meta strong {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -495,11 +495,11 @@ main {
   border-radius: 2px;
   color: #25271f;
   cursor: pointer;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.09em;
   line-height: 1.15;
-  min-height: 34px;
+  min-height: 38px;
   min-width: 0;
   text-transform: uppercase;
 }
@@ -609,7 +609,7 @@ footer {
   font-size: 11px;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 1440px;
+  max-width: 1680px;
   padding: 32px 5vw 50px;
 }
 
@@ -621,6 +621,15 @@ footer span {
 
 footer p {
   margin: 0;
+}
+
+.footer-copy {
+  line-height: 1.6;
+  text-align: right;
+}
+
+.game-credit {
+  color: var(--ink);
 }
 
 button:focus-visible,
@@ -650,6 +659,7 @@ a:focus-visible {
   .playing-card {
     height: 350px;
     min-height: 350px;
+    padding: 17px;
   }
 
   .card-slot {
@@ -928,6 +938,11 @@ a:focus-visible {
     min-height: 29px;
   }
 
+  .card-meta span,
+  .card-meta strong {
+    font-size: 9px;
+  }
+
   .card-actions {
     gap: 5px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -966,5 +981,9 @@ a:focus-visible {
     align-items: start;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .footer-copy {
+    text-align: left;
   }
 }
